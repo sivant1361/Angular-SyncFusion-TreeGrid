@@ -2,18 +2,16 @@
   [dataSource]="data"
   [treeColumnIndex]="1"
   childMapping="subtasks"
-  [allowPaging]="true"
-  [pageSettings]="pageSettings"
-  [allowSorting]="true"
-  [sortSettings]="sortSettings"
-  [allowFiltering]="true"
+  [editSettings]="editSettings"
+  [toolbar]="toolBar"
 >
   <e-columns>
     <e-column
       field="taskID"
       headerText="Task ID"
-      textAlign="Center"
+      textAlign="Right"
       width="50"
+      isPrimaryKey="true"
     ></e-column>
     <e-column
       field="taskName"
@@ -27,12 +25,24 @@
       textAlign="Right"
       format="yMd"
       width="90"
+      editType="datepickeredit"
     ></e-column>
     <e-column
       field="duration"
       headerText="Duration"
       textAlign="Right"
       width="80"
+      editType="numericedit"
+      [edit]="numericParams"
     ></e-column>
+    <e-column
+      field="approved"
+      headerText="Approved"
+      textAlign="Right"
+      width="80"
+      [displayAsCheckBox]="true"
+      editType="booleanedit"
+    ></e-column>
+    <e-column headerText="Commands" [commands]="commands" width="80"></e-column>
   </e-columns>
 </ejs-treegrid>
