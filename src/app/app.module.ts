@@ -7,13 +7,25 @@ import {
   TreeGridModule,
   EditService,
   ToolbarService,
-  CommandColumnService,
 } from '@syncfusion/ej2-angular-treegrid';
+import { FormsModule } from '@angular/forms';
+
+import { NumericTextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
+import { DatePickerAllModule } from '@syncfusion/ej2-angular-calendars';
+import { CheckBoxAllModule } from '@syncfusion/ej2-angular-buttons';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, TreeGridModule],
-  providers: [EditService, ToolbarService, CommandColumnService],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    TreeGridModule,
+    FormsModule,
+    NumericTextBoxAllModule,
+    DatePickerAllModule,
+    CheckBoxAllModule,
+  ],
+  providers: [EditService, ToolbarService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

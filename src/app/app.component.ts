@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { sampleData } from './datasource';
 import { EditSettingsModel } from '@syncfusion/ej2-angular-treegrid';
-import { CommandModel } from '@syncfusion/ej2-grids';
+import { SaveEventArgs } from '@syncfusion/ej2-grids';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,12 +11,12 @@ export class AppComponent implements OnInit {
   public data: Object[];
   public editSettings: EditSettingsModel;
   public toolBar: string[];
-  public numericParams: Object;
-  public commands: CommandModel[];
+  public taskData: ITaskModel;
 
   title = 'Sync Fusion Grids';
 
   ngOnInit(): void {
+    this.data = sampleData;
     this.editSettings = {
       allowEditing: true,
       allowAdding: true,
@@ -25,25 +25,20 @@ export class AppComponent implements OnInit {
       mode: 'Dialog',
     };
     this.toolBar = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
-    this.numericParams = { params: { format: 'n' } };
-    this.commands = [
-      {
-        type: 'Edit',
-        buttonOption: { cssClass: 'e-flat', iconCss: 'e-edit e-icons' },
-      },
-      {
-        type: 'Delete',
-        buttonOption: { cssClass: 'e-flat', iconCss: 'e-delete e-icons' },
-      },
-      {
-        type: 'Save',
-        buttonOption: { cssClass: 'e-flat', iconCss: 'e-update e-icons' },
-      },
-      {
-        type: 'Cancel',
-        buttonOption: { cssClass: 'e-flat', iconCss: 'e-cancel-icon e-icons' },
-      },
-    ];
-    this.data = sampleData;
   }
+
+  actionBegin(args: SaveEventArgs): void {
+    if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+      this.taskData = Object.assign({}, args.rowData);
+    }
+  }
+}
+export interface ITaskModel {
+  taskID?: Number;
+  taskName?: String;
+  startDate?: Date;
+  duration?: Number;
+  progress?: Number;
+  priority?: String;
+  approved?: Boolean;
 }
